@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+class GroupsPage extends StatefulWidget {
+  const GroupsPage({super.key});
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  State<GroupsPage> createState() => _GroupsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _GroupsPageState extends State<GroupsPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -22,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         bottomOpacity: 0.0,
-        title: const Text('Settings'),
+        title: const Text('Groups'),
         centerTitle: false,
       ),
       body: Center(

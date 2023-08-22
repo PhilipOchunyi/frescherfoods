@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Defaults {
-  static const Color drawerItemColor = Colors.blueGrey;
+  static const Color drawerItemColor = Colors.black;
   static const Color drawerItemSelectedColor = Colors.blueAccent;
 
   //static final Color drawerSelectedTileColor = Colors.blue[100];
@@ -10,14 +10,14 @@ class Defaults {
     'Profile',
     'favorites',
     'Bookmarks',
-    
+    'Groups'
     'Log Out',
   ];
 
   static final drawerItemIcon = [
-    Icons.person,
     Icons.favorite,
     Icons.bookmark,
+    Icons.group,
     Icons.logout_outlined,
   ];
 }

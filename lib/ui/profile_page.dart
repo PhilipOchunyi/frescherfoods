@@ -37,9 +37,7 @@ import 'package:flutter/material.dart';
 // }
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key, required this.title});
-
-  final String title;
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -60,7 +58,8 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         bottomOpacity: 0.0,
-        title: Text(widget.title),
+        title: const Text('Profile'),
+        centerTitle: false,
       ),
       body: Center(
         child: Column(

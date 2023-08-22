@@ -28,7 +28,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/homepage',
       routes: {
         '/login': (context) => const LoginPage(),
-        '/homepage': (context) => const HomePage(title: 'Home'),
+        '/homepage': (context) => HomePage(
+              onSignedOut: () {},
+              userId: '',
+            ),
         '/camerapage': (context) => const CameraPage(),
         '/searchpage': (context) => const SearchPage(),
         '/notification': (context) => const NotificationPage(),
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
         '/signin': (context) => const SignInPage(),
         '/successpage': (context) => const SuccessPage(),
         '/welcomepage': (context) => const WelcomePage(),
-        '/profilepage': (context) => const ProfilePage(title: 'Profile'),
+        '/profilepage': (context) => const ProfilePage(),
 
         //Remove  profile title
 
@@ -128,3 +131,245 @@ class MyApp extends StatelessWidget {
     // }
   }
 }
+
+// Icon icon;
+// String name = "";
+
+//  int _indexClicked = 0;
+
+//         child: Material(
+
+//           children: [
+//             DrawerHeader(
+//               decoration: const BoxDecoration(
+//                 color: Colors.blueAccent,
+
+//                 // image: DecorationImage(
+//                 //   fit: BoxFit.fill,
+//                 //   //image: AssetImage("assets/images/drawer.jpg"),
+//                 // ),
+//               ),
+//               //Remove padding
+//               padding: EdgeInsets.zero
+//               child: Container(
+//                 child: const Column(
+//                   children: [
+//                     SizedBox(
+//                       height: 10,
+//                     ),
+//                     //Circular Avater
+//                     CircleAvatar(
+//                       radius: 20,
+//                       backgroundImage: AssetImage("assets/images/profile.jpg"),
+//                     ),
+//                     SizedBox(
+//                       height: 10.0,
+//                     ),
+//                     Text(
+//                       "Max Mustermann",
+//                       style: TextStyle(
+//                         color: Colors.white,
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.bold,
+//                         fontFamily: "sanchez",
+//                       ),
+//                     ),
+//                     SizedBox(
+//                       height: 10,
+//                     ),
+//                     Text(
+//                       "maxmustermann@web.de",
+//                       style: TextStyle(
+//                         color: Colors.white,
+//                         fontSize: 10,
+//                         fontWeight: FontWeight.w400,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             Expanded(
+//               child: ListView(
+//                 padding: EdgeInsets.zero,
+//                 children: [
+//                   ListTile(
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       setState(() {
+//                         _indexClicked = 0;
+//                       });
+//                       Navigator.pop(context);
+//                       Navigator.of(context).push(MaterialPageRoute(
+//                         builder: (context) => const ProfilePage(),
+//                       ));
+// //Navigator.pop(context);
+//                     },
+//                     //hoverColor: hoverC,
+//                     leading: Icon(
+//                       Defaults.drawerItemIcon[0],
+//                       size: 30,
+// //If item[0] is selected then drawerselected color else draw item color
+//                       color: _indexClicked == 0
+//                           ? Defaults.drawerItemSelectedColor
+//                           : Defaults.drawerItemColor,
+//                     ),
+//                     title: Text(
+//                       Defaults.drawerItemText[0],
+//                       style: TextStyle(
+// //color: Colors.blueAccent,
+//                         fontFamily: "sanchez",
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.w500,
+//                         color: _indexClicked == 0
+//                             ? Defaults.drawerItemSelectedColor
+//                             : Defaults.drawerItemColor,
+//                       ),
+//                     ),
+//                   ),
+//                   ListTile(
+//                     onTap: () {
+//                        Navigator.pop(context);
+//                       setState(() {
+//                         _indexClicked = 1;
+//                       });
+//                       Navigator.pop(context);
+//                       Navigator.of(context).push(MaterialPageRoute(
+//                         builder: (context) => const FavoritesPage(),
+//                       ));
+//                     },
+//                     leading: Icon(
+//                       Defaults.drawerItemIcon[1],
+//                       size: 30,
+// //If item[0] is selected then drawerselected color else draw item color
+//                       color: _indexClicked == 1
+//                           ? Defaults.drawerItemSelectedColor
+//                           : Defaults.drawerItemColor,
+//                     ),
+//                     title: Text(
+//                       Defaults.drawerItemText[1],
+//                       style: TextStyle(
+// //color: Colors.blueAccent,
+//                         fontFamily: "sanchez",
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.w500,
+//                         color: _indexClicked == 1
+//                             ? Defaults.drawerItemSelectedColor
+//                             : Defaults.drawerItemColor,
+//                       ),
+//                     ),
+//                   ),
+//                   ListTile(
+
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       setState(() {
+//                         _indexClicked = 2;
+//                       });
+//                       Navigator.pop(context);
+//                       Navigator.of(context).push(MaterialPageRoute(
+//                         builder: (context) => const BookmarkPage(),
+//                       ));
+//                     },
+//                     leading: Icon(
+
+//                       Defaults.drawerItemIcon[2],
+//                       size: 35,
+// //If item[0] is selected then drawerselected color else draw item color
+//                       color: _indexClicked == 2
+//                           ? Defaults.drawerItemSelectedColor
+//                           : Defaults.drawerItemColor,
+//                     ),
+//                     title: Text(
+//                       Defaults.drawerItemText[2],
+//                       style: TextStyle(
+// //color: Colors.blueAccent,
+//                         fontFamily: "sanchez",
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.w500,
+//                         color: _indexClicked == 2
+//                             ? Defaults.drawerItemSelectedColor
+//                             : Defaults.drawerItemColor,
+//                       ),
+//                     ),
+//                   ),
+//                   const SizedBox(height: 300.0),
+//                   const Divider(
+//                     color: Colors.black,
+//                     indent: 3,
+//                     endIndent: 3,
+//                   ),
+//                   ListTile(
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       setState(() {
+//                         _indexClicked = 3;
+//                       });
+//                       Navigator.pop(context);
+//                       Navigator.of(context).push(MaterialPageRoute(
+//                         builder: (context) => const GroupsPage(),
+//                       ));
+
+//                     },
+//                     leading: Icon(
+//                       Defaults.drawerItemIcon[3],
+//                       size: 30,
+// //If item[0] is selected then drawerselected color else draw item color
+//                       color: _indexClicked == 3
+//                           ? Defaults.drawerItemSelectedColor
+//                           : Defaults.drawerItemColor,
+//                     ),
+//                     title: Text(
+//                       Defaults.drawerItemText[3],
+//                       style: TextStyle(
+// //color: Colors.blueAccent,
+//                         fontFamily: "sanchez",
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.w500,
+//                         color: _indexClicked == 3
+//                             ? Defaults.drawerItemSelectedColor
+//                             : Defaults.drawerItemColor,
+//                       ),
+//                     ),
+//                   ),
+//                   ListTile(
+//                     onTap: () {
+//                       Navigator.pop(context);
+//                       setState(() {
+//                         _indexClicked = 4;
+//                       });
+//                       Navigator.pop(context);
+//                       Navigator.of(context).push(MaterialPageRoute(
+//                         builder: (context) => const LogOutPage(),
+//                       ));
+
+//                     },
+//                     leading: Icon(
+//                       Defaults.drawerItemIcon[4],
+//                       size: 30,
+// //If item[0] is selected then drawerselected color else draw item color
+//                       color: _indexClicked == 4
+//                           ? Defaults.drawerItemSelectedColor
+//                           : Defaults.drawerItemColor,
+//                     ),
+//                     title: Text(
+//                       Defaults.drawerItemText[4],
+//                       style: TextStyle(
+// //color: Colors.blueAccent,
+//                         fontFamily: "sanchez",
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.w500,
+//                         color: _indexClicked == 3
+//                             ? Defaults.drawerItemSelectedColor
+//                             : Defaults.drawerItemColor,
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//   }
+// }
