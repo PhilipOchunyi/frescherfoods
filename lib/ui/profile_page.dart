@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresherfoods/ui/settings_page.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -60,6 +61,17 @@ class _ProfilePageState extends State<ProfilePage> {
         bottomOpacity: 0.0,
         title: const Text('Profile'),
         centerTitle: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const SettingsPage(),
+              ));
+            },
+            icon: const Icon(Icons.settings),
+            color: Colors.white,
+          ),
+        ],
       ),
       body: Center(
         child: Column(
