@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fresherfoods/src/Features/Onboarding/Presentation/Screens/search_page.dart';
 import 'package:fresherfoods/src/Features/Onboarding/Presentation/widgets/navigation_drawer_widget.dart';
-import 'package:fresherfoods/ui/camera_page.dart';
-import 'package:fresherfoods/ui/notification_page.dart';
-import 'package:fresherfoods/ui/search_page.dart';
 //import 'package:fresherfoods/ui/share_post_page.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:fresherfoods/ui/camera_page.dart';
+import 'package:fresherfoods/ui/notification_page.dart';
 
 //import 'package:fresherfoods/widgets/navigation_drawer_widget.dart';
 
@@ -20,10 +20,19 @@ class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const SearchPage(),
-    const CameraPage(),
-    const NotificationPage(),
+  final List<Widget> _pages = const [
+    //HomePage(),
+    SearchPage(),
+    CameraPage(),
+    NotificationPage()
+    // const Text('Home Page',
+    //     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+    // const Text('Search Page',
+    //     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+    // const Text('Camera Page',
+    //     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+    // const Text('Notification Page',
+    //     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
   ];
 
   void _onItemTapped(int index) {
@@ -60,20 +69,24 @@ class _HomePageState extends State<HomePage> {
         //   ),
         // ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: MediaQuery.sizeOf(context).width * 1,
-          height: MediaQuery.sizeOf(context).height * .8,
-          child: _pages[_currentIndex],
-        ),
+      // body: Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: SizedBox(
+      //     width: MediaQuery.sizeOf(context).width * 1,
+      //     height: MediaQuery.sizeOf(context).height * .8,
+      //     child: _pages[_currentIndex],
+      //   ),
+      //),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
       ), // Show the current page based on _currentIndex.
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         iconSize: 30,
-        selectedFontSize: 20,
+        selectedFontSize: 15,
         unselectedFontSize: 10,
         unselectedItemColor: Colors.black,
         backgroundColor: Colors.white,
@@ -101,12 +114,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   shape: const CircleBorder(),
-      //   //backgroundColor: Colors.blueAccent,
-      //   child: const Icon(Icons.add),
-      // ),
+
       floatingActionButton: SpeedDial(
         //Speed dial menu
         //marginBottom: 10, //margin bottom
@@ -156,14 +164,10 @@ class _HomePageState extends State<HomePage> {
             labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () {},
           ),
-
-          //add more menu item childs here
         ],
       ),
 
       drawer: const NavigationDrawerWidget(),
     );
-
-    // This trailing comma makes auto-formatting nicer for build methods.
   }
 }

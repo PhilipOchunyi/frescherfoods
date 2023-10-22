@@ -14,7 +14,7 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
-    // startTimer();
+    //startTimer();
     super.initState();
   }
 
@@ -51,36 +51,35 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
               Positioned(
-                  bottom: 100.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const LoginPage()));
-                      },
-                      child: Container(
-                        height: 50.0,
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0))),
-                        child: const Center(
-                          child: Text(
-                            "Get Started",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500,
-                            ),
+                bottom: 100.0,
+                left: 0.0,
+                right: 0.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
+                    },
+                    child: Container(
+                      height: 50.0,
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(30.0))),
+                      child: const Center(
+                        child: Text(
+                          "Get Started",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

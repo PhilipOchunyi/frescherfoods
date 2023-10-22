@@ -48,13 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
         ),
-        //const SizedBox(height: 40.0),
-        // inputStyle("First name: ", "Jack"),
-        // inputStyle("Last name: ", "Ryan"),
-        // inputStyle("Email: ", "test@gmail.com"),
-        // inputStyle("Password: ", "abcd12345"),
-        // inputStyle("Username: ", "Jay"),
-        //const SizedBox(height: 30.0),
+     
         Container(
           height: 60,
           width: 300,
@@ -70,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
-        //const SizedBox(height: 30.0),
+        const SizedBox(height: 20.0),
         Container(
           height: 60,
           width: 300,
@@ -88,6 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
+        const SizedBox(height: 20.0),
       ],
     );
   }

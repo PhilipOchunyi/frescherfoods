@@ -20,76 +20,83 @@ class NavigationDrawerWidget extends StatelessWidget {
 
     return Drawer(
       child: Material(
-        child: ListView(
-          children: <Widget>[
-            buildHeader(
-              name: name,
-              image: headerImage,
-              email: email,
-              onClicked: () {
-                Navigator.pop(context);
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const ProfilePage(),
-                ));
-              },
-              backgroundcolor: Colors.blueAccent,
-            ),
-            const SizedBox(height: 0),
-            const Divider(
-                color: Colors.blueGrey, indent: 20.0, endIndent: 20.0),
-            const SizedBox(height: 0),
-            Column(
-              children: [
-                const SizedBox(height: 48),
-                buildMenuItem(
-                  text: 'Profile',
-                  icon: Icons.person,
-                  onClicked: () => selectedItem(context, 0),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                const SizedBox(height: 16),
-                buildMenuItem(
-                  text: 'Favorites',
-                  icon: Icons.favorite_border,
-                  onClicked: () => selectedItem(context, 1),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                const SizedBox(height: 16),
-                buildMenuItem(
-                  text: 'Bookmarks',
-                  icon: Icons.bookmark,
-                  onClicked: () => selectedItem(context, 2),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                const SizedBox(height: 16),
-                buildMenuItem(
-                  text: 'Groups',
-                  icon: Icons.groups,
-                  onClicked: () => selectedItem(context, 3),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            const Divider(
-                color: Colors.blueGrey, indent: 20.0, endIndent: 20.0),
-            const SizedBox(height: 24),
-            Container(
-              padding: EdgeInsets.zero,
-              child: Column(
-                children: [
-                  buildMenuItem(
-                    text: 'Support',
-                    icon: Icons.support,
-                    onClicked: () => selectedItem(context, 4),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: <Widget>[
+                  buildHeader(
+                    name: name,
+                    image: headerImage,
+                    email: email,
+                    onClicked: () {
+                      // Navigator.pop(context);
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //   builder: (context) => const ProfilePage(),
+                      // ));
+                    },
+                    backgroundcolor: Colors.blueAccent,
+                  ),
+                  const SizedBox(height: 0),
+                  const Divider(
+                      color: Colors.blueGrey, indent: 20.0, endIndent: 20.0),
+                  const SizedBox(height: 0),
+                  Column(
+                    children: [
+                      const SizedBox(height: 48),
+                      buildMenuItem(
+                        text: 'Profile',
+                        icon: Icons.person,
+                        onClicked: () => selectedItem(context, 0),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Favorites',
+                        icon: Icons.favorite_border,
+                        onClicked: () => selectedItem(context, 1),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Bookmarks',
+                        icon: Icons.bookmark,
+                        onClicked: () => selectedItem(context, 2),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Groups',
+                        icon: Icons.groups,
+                        onClicked: () => selectedItem(context, 3),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  const Divider(
+                      color: Colors.blueGrey, indent: 20.0, endIndent: 20.0),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    child: Column(
+                      children: [
+                        buildMenuItem(
+                          text: 'Support',
+                          icon: Icons.support,
+                          onClicked: () => selectedItem(context, 4),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -108,41 +115,68 @@ class NavigationDrawerWidget extends StatelessWidget {
     required MaterialAccentColor backgroundcolor,
   }) =>
       InkWell(
-        onTap: onClicked,
-        child: Container(
-          padding: padding.add(const EdgeInsets.symmetric(vertical: 80.0)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage("assets/images/profile.jpg"),
-                radius: 25.0,
+        //onTap: onClicked,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: padding.add(const EdgeInsets.symmetric(vertical: 80.0)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/profile.jpg"),
+                    radius: 55,
+                  ),
+                  const SizedBox(width: 20.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          email,
+                          style: const TextStyle(
+                              fontSize: 10, color: Colors.blueAccent),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 20.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      email,
-                      style: const TextStyle(
-                          fontSize: 10, color: Colors.blueAccent),
-                    ),
-                  ],
+            ),
+            Positioned(
+              bottom: 90,
+              right: 200,
+              child: InkWell(
+                // onTap: () {
+                //   showModalBottomSheet(
+                //       context: context, builder: ((builder) => bottomSheet()));
+                // },
+                child: const Icon(
+                  Icons.camera,
+                  color: Colors.blueAccent,
+                  size: 20,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
+
+  //  bottomSheet() {
+  //   return Container(
+  //     height: 100.0, width: MediaQuery.of(context).size.width,
+  //     margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+      
+  //   );
+  // }
 }
 
 Widget buildMenuItem({
