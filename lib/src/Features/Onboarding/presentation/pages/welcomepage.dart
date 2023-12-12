@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/login.dart';
 
-import '../AutenticationPage/login.dart';
+import 'autentication_page/login.dart';
 //import 'package:fresherfoods/ui/login.dart';
 
 class WelcomePage extends StatefulWidget {

@@ -1,13 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fresherfoods/src/Features/onboarding/presentation/pages/autentication_page/login.dart';
 import 'package:fresherfoods/ui/bookmarks_page.dart';
 import 'package:fresherfoods/ui/favorites_page.dart';
 import 'package:fresherfoods/ui/groups_page.dart';
+import 'package:fresherfoods/ui/logout_page.dart';
 import 'package:fresherfoods/ui/profile_page.dart';
 import 'package:fresherfoods/ui/support_page.dart';
-// import 'package:reactive_theme/reactive_theme.dart';
 
-class NavigationDrawerWidget extends StatelessWidget {
-  const NavigationDrawerWidget({super.key});
+// import 'package:reactive_theme/reactive_theme.dart';
+class NavDrawer extends StatefulWidget {
+  const NavDrawer({super.key});
+
+  @override
+  State<NavDrawer> createState() => _NavDrawerState();
+}
+
+class _NavDrawerState extends State<NavDrawer> {
   final indexClicked = 0;
 
   final padding = const EdgeInsets.symmetric(horizontal: 20.0);
@@ -19,6 +28,10 @@ class NavigationDrawerWidget extends StatelessWidget {
     String headerImage = 'assets/images/profile.jpg';
 
     return Drawer(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(25), bottomRight: Radius.circular(25)),
+      ),
       child: Material(
         child: Column(
           children: [
@@ -98,6 +111,26 @@ class NavigationDrawerWidget extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    child: Column(
+                      children: [
+                        buildMenuItem(
+                          text: 'Log out',
+                          icon: Icons.logout,
+                          onClicked: () async {
+                            print("sign out");
+                            FirebaseAuth.instance.signOut();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -152,31 +185,18 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 90,
-              right: 200,
-              child: InkWell(
-                // onTap: () {
-                //   showModalBottomSheet(
-                //       context: context, builder: ((builder) => bottomSheet()));
-                // },
-                child: const Icon(
-                  Icons.camera,
-                  color: Colors.blueAccent,
-                  size: 20,
-                ),
+              bottom: 70,
+              right: 160,
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add_a_photo),
+                color: Colors.blueAccent,
+                iconSize: 20,
               ),
             ),
           ],
         ),
       );
-
-  //  bottomSheet() {
-  //   return Container(
-  //     height: 100.0, width: MediaQuery.of(context).size.width,
-  //     margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      
-  //   );
-  // }
 }
 
 Widget buildMenuItem({
@@ -219,6 +239,12 @@ void selectedItem(BuildContext context, int index) {
     case 4:
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const SupportPage(),
+      ));
+      break;
+
+    case 5:
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const LogoutPage(),
       ));
       break;
 

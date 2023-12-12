@@ -10,8 +10,18 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Notification Page"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Notifications",
+          style: TextStyle(
+            color: Colors.blueAccent,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+      ),
     );
   }
 }

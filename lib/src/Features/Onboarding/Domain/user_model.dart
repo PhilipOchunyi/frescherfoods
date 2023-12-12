@@ -16,10 +16,16 @@ class User {
   bool agbAccepted;
 
   User(
-    this.id,
-    this.email,
-    this.password,
-    this.avatarImagePath,
-    this.agbAccepted,
-  );
+      {required this.id,
+      required this.email,
+      required this.password,
+      required this.avatarImagePath,
+      required this.agbAccepted});
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+      id: json["id"],
+      email: json["email"],
+      password: json["password"],
+      avatarImagePath: json["avatarImagePath"],
+      agbAccepted: json["agbAccepted"]);
 }

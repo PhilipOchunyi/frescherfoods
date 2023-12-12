@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/AutenticationPage/password_forgotten.dart';
+import 'package:fresherfoods/src/Features/Onboarding/presentation/pages/autentication_page/password_forgotten.dart';
+import 'package:fresherfoods/src/Features/meals/presentation/home_page.dart';
 import 'package:fresherfoods/ui/bookmarks_page.dart';
-import 'package:fresherfoods/ui/camera_page.dart';
+import 'package:fresherfoods/src/Features/upload_items/presentation/camera_page.dart';
 import 'package:fresherfoods/ui/conditions_page.dart';
 import 'package:fresherfoods/ui/favorites_page.dart';
 import 'package:fresherfoods/ui/gallery_list_page.dart';
 import 'package:fresherfoods/ui/gallery_page.dart';
 import 'package:fresherfoods/ui/groups_page.dart';
 import 'package:fresherfoods/ui/logout_page.dart';
+//import 'package:fresherfoods/ui/logout_page.dart';
 import 'package:fresherfoods/ui/notification_page.dart';
 import 'package:fresherfoods/ui/profile_page.dart';
-//import 'package:fresherfoods/src/Features/Onboarding/Presentation/Screens/search_page.dart';
 import 'package:fresherfoods/ui/settings_page.dart';
 import 'package:fresherfoods/ui/share_post_page.dart';
 import 'package:fresherfoods/ui/support_page.dart';
 
-import 'src/Features/Onboarding/Presentation/Pages/AutenticationPage/login.dart';
-import 'src/Features/Onboarding/Presentation/Pages/AutenticationPage/register_page.dart';
-import 'src/Features/Onboarding/Presentation/Screens/home_page.dart';
-import 'src/Features/Onboarding/Presentation/Pages/WelcomePage/welcomepage.dart';
-import 'src/Features/Onboarding/Presentation/Screens/search_page.dart';
+import 'src/Features/Onboarding/presentation/pages/autentication_page/login.dart';
+import 'src/Features/Onboarding/presentation/pages/autentication_page/register_page.dart';
+
+import 'src/Features/Onboarding/presentation/pages/welcomepage.dart';
+import 'ui/search_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,10 +31,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // theme:
-        //     ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)),
-        //theme: lightTheme,
-        //darkTheme: darkTheme,
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            appBarTheme: const AppBarTheme(color: Colors.blueAccent)),
         themeMode: ThemeMode.system,
         title: "Homepage",
         initialRoute: '/welcomepage',
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           '/notification': (context) => const NotificationPage(),
           '/welcomepage': (context) => const WelcomePage(),
           '/profilepage': (context) => const ProfilePage(),
-          '/logout': (context) => const LogOutPage(),
+          '/logoutpage': (context) => const LogoutPage(),
           '/bookmarkspage': (context) => const BookmarksPage(),
           '/favoritespage': (context) => const FavoritesPage(),
           '/groupspage': (context) => const GroupsPage(),

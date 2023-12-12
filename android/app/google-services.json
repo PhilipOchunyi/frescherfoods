@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "228184608661",
+    "project_id": "fresherfoods-3b33a",
+    "storage_bucket": "fresherfoods-3b33a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228184608661:android:6be75d7397f0d72b63709c",
+        "android_client_info": {
+          "package_name": "com.example.fresherfoods"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtmyPbeNID45T9MzQnKdTc9447H9zU65Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

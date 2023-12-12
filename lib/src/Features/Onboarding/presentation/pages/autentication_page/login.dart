@@ -1,15 +1,10 @@
+//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/AutenticationPage/password_forgotten.dart';
-import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/AutenticationPage/register_page.dart';
-//import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/Screen/homepage.dart';
-
-import '../../../../../../ui/conditions_page.dart';
-import '../../Screens/home_page.dart';
-//import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/password_forgotten.dart';
-//import 'package:fresherfoods/src/Features/Onboarding/Presentation/Pages/register_page.dart';
-//import 'package:fresherfoods/ui/password_forgotten.dart';
-// 'package:fresherfoods/ui/register_page.dart';
+import 'package:fresherfoods/src/Features/meals/presentation/home_page.dart';
+import 'package:fresherfoods/src/Features/onboarding/presentation/pages/autentication_page/password_forgotten.dart';
+import 'package:fresherfoods/src/Features/onboarding/presentation/pages/autentication_page/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,30 +14,42 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? email, password;
-  Map userData = {};
-  bool isChecked = false;
-
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<User?> signInWithEmail(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "User not found") {
+        debugPrint("User not found for that email");
+      }
+    }
+    return user;
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: content()),
     );
-  }
-
-  void successfulLogin() {
-    if (_emailController.text.isNotEmpty &&
-        _passwordController.text.isNotEmpty &&
-        isChecked) {
-      Navigator.pushReplacementNamed(context, '/homepage');
-
-      print("success");
-    } else {
-      print("Login unsuccessful. Check your datails");
-    }
   }
 
   Widget content() {
@@ -130,28 +137,20 @@ class _LoginPageState extends State<LoginPage> {
                               width: 300,
                               child: TextFormField(
                                 controller: _emailController,
-                                // validator: (value) {
-                                //   if (value == null || value.isEmpty) {
-                                //     return 'Please enter your email';
-                                //   }
-                                //   if (!value.contains("@")) {
-                                //     return "Please Enter Valid Email ";
-                                //   }
-                                //   return null;
-                                // },
                                 keyboardType: TextInputType.emailAddress,
                                 cursorColor: Colors.grey,
                                 style: const TextStyle(
                                   color: Colors.black54,
+                                  fontSize: 20,
+                                  letterSpacing: 1.4,
                                 ),
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "example@gmail.com"),
+                                    hintText: "User Email"),
                               ),
                             ),
                           ],
                         ),
-                  
                       ],
                     ),
                   ),
@@ -171,18 +170,6 @@ class _LoginPageState extends State<LoginPage> {
                               width: 300,
                               child: TextFormField(
                                 controller: _passwordController,
-                                // validator: (value) {
-                                //   print("hi");
-                                //   if (value == null || value.isEmpty) {
-                                //     return 'Please enter your password';
-                                //   }
-                                //   return null;
-                                // },
-                                //if (password == null || password.isEmpty) {
-                                //     return 'Please enter your password';
-                                //   }
-                                //   return null;
-                                // },
                                 obscureText: true,
                                 cursorColor: Colors.grey,
                                 style: const TextStyle(
@@ -192,15 +179,11 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Password"),
+                                    hintText: "User Password"),
                               ),
                             ),
                           ],
                         ),
-                        // const SizedBox(
-                        //   width: 360,
-                        //   child: Divider(color: Colors.grey),
-                        // ),
                       ],
                     ),
                   ),
@@ -209,7 +192,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           const SizedBox(height: 20),
-
           RichText(
             text: TextSpan(
               text: "Forgotten your password?", //TO DO
@@ -224,48 +206,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           const SizedBox(height: 20),
-          Container(
-            child: Row(
-              children: [
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = !isChecked;
-                    });
-                  },
-                ),
-                Container(
-                  width: 280,
-                  height: 50,
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "By pressing log in you agree to our ", //TO DO
-                      style:
-                          const TextStyle(color: Colors.grey, fontSize: 15.0),
-                      children: [
-                        TextSpan(
-                          text: "terms & conditions ",
-                          //TO DO
-                          style: const TextStyle(
-                              color: Colors.blueAccent, fontSize: 15.0),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ConditionsPage()));
-                            },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
 
           //const SizedBox(height: 1.0),
           Padding(
@@ -278,40 +218,33 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: GestureDetector(
-                onTap: () {
-                  print("Buttom");
-                  if (_emailController.text.isEmpty) {
-                    //return "Please enter your email";
-                    print("Enter email");
-                  } else if (!_emailController.text.contains("@")) {
-                    //return "Please Enter Valid Email ";
-                    print("Enter email with @");
-                  } else {
-                    print("Email correct");
+                onTap: () async {
+                  User? user = await signInWithEmail(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    context: context,
+                  );
+                  // ignore: avoid_print
+                  print(user);
+                  if (user != null) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
                   }
-
-                  if (_passwordController.text.isEmpty) {
-                    //return "Please enter your email";
-                    print("Enter password");
-                  } else {}
-
-                  successfulLogin();
-
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
                 },
-
-        
-
-                child: const Center(
-                  child: Text(
-                    "LOGIN",
-                    style: TextStyle(
+                // ignore: avoid_unnecessary_containers
+                child: Container(
+                  child: const Center(
+                    child: Text(
+                      "LOGIN",
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),

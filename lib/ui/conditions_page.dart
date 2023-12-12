@@ -6,12 +6,15 @@ class ConditionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Terms & conditions"),
-      ),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
-    );
+        appBar: AppBar(
+          title: const Text("Terms & conditions"),
+        ),
+        body: const Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [],
+          ),
+        ));
   }
 }

@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PasswordForgottenPage extends StatefulWidget {
@@ -8,6 +11,32 @@ class PasswordForgottenPage extends StatefulWidget {
 }
 
 class _PasswordForgottenPageState extends State<PasswordForgottenPage> {
+  final TextEditingController _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future passwordReset() async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+      showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+              content: Text("Password reset link sent! Check your email")));
+    } on FirebaseAuthException catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(e.message.toString()),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +49,7 @@ class _PasswordForgottenPageState extends State<PasswordForgottenPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          height: 290,
+          height: 250,
           width: double.infinity,
           decoration: const BoxDecoration(
               color: Colors.blueAccent,
@@ -39,81 +68,68 @@ class _PasswordForgottenPageState extends State<PasswordForgottenPage> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const Text(
-                "Find your account",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ],
           ),
         ),
-        const SizedBox(height: 40.0),
+        //const SizedBox(height: 10.0),
         Container(
-          padding: const EdgeInsets.only(right: 50.0),
-          child: const Text(
-            "Enter your username or email",
-            style: TextStyle(color: Colors.black, fontSize: 18.0),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              "Please enter your email address and we will sent you a password reset link",
+              style: TextStyle(color: Colors.black, fontSize: 18.0),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
-        const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.only(right: 65.0),
-          child: const Text(
-            "Can't reset your password?",
-            style: TextStyle(color: Colors.blueAccent, fontSize: 18.0),
-          ),
-        ),
-        const SizedBox(height: 20.0),
         SizedBox(
-          width: 300,
+          width: 350,
           child: TextField(
+            controller: _emailController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
+              hintText: "Email",
               contentPadding: const EdgeInsets.only(left: 10.0),
             ),
           ),
         ),
-        const SizedBox(height: 40.0),
         Container(
           height: 60,
           width: 300,
           decoration: BoxDecoration(
             color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              passwordReset();
             },
             child: const Text(
-              "Find account",
+              "Reset Password",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
         ),
-        const SizedBox(height: 40),
-        Container(
-          height: 60,
-          width: 300,
-          decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: TextButton(
-            onPressed: () {
-              Navigator.pop(context);
+        const SizedBox(height: 10),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
             },
             child: const Text(
-              "Back to log in",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              'Go Back',
+              style: TextStyle(
+                  color: Colors.blueGrey,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline),
             ),
           ),
-        ),
+        ]),
+        SizedBox(
+          height: 60.0,
+        )
       ],
     );
   }
